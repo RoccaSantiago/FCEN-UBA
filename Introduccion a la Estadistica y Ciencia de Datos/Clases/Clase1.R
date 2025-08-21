@@ -20,3 +20,21 @@ while (sum_b <= 1000){
 }
 
 print(i)
+
+#c
+
+coor_sum <- function(vector){
+  sum <- 0
+  n <- length(vector)
+  for (i in 1:n){
+    v_i = vector[i]
+      if (v_i > 0){
+        sum <- sum + v_i
+      }
+  }
+ return(sum)
+}
+ 
+v <- c(1,2,3,4,-1,-3)
+
+print(coor_sum(v))
