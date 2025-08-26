@@ -119,15 +119,15 @@ rad_cuan <- quantile(rodio,cuantiles)
 
 #Ejercicio 4
 
-sa <- read.csv("Practicas/Data/salchichas_A.txt",sep = " ")
-sb <- read.csv("Practicas/Data/salchichas_B.txt",sep = " ")
-sc <- read.csv("Practicas/Data/salchichas_C.txt",sep = " ")
+sa <- read.csv("Practicas/Data/salchichas_A.txt",sep = "")
+sb <- read.csv("Practicas/Data/salchichas_B.txt",sep = "")
+sc <- read.csv("Practicas/Data/salchichas_C.txt",sep = "")
 
 
 #a
-colnames(sa)[1] <- "Calorias"
-colnames(sb)[1] <- "Calorias"
-colnames(sc)[1] <- "Calorias"
+colnames(sa) <- c("Calorias", "Sodio")
+colnames(sb) <- c("Calorias", "Sodio")
+colnames(sc) <- c("Calorias", "Sodio")
 
 
 sa$tipo <- 'A'
@@ -136,6 +136,26 @@ sc$tipo <- 'C'
 
 salchichas <- rbind(sa,sb,sc)
 
-write.table(salchichas, "Practicas/Data/salchichas.txt", row.names = TRUE, sep = "\t")
+write.table(salchichas, "Practicas/Data/salchichas.txt", row.names = TRUE)
 
 #b
+
+par(mfrow = c(1,3))
+
+hist(salchichas$Calorias[salchichas$tipo == "A"],
+     main = "Histograma Calorías - Salchicha A",
+     xlab = "Calorías", col = "steelblue", breaks = 10)
+
+# Histograma para la salchicha B
+hist(salchichas$Calorias[salchichas$tipo == "B"],
+     main = "Histograma Calorías - Salchicha B",
+     xlab = "Calorías", col = "lightgreen", breaks = 10)
+
+# Histograma para la salchicha C
+hist(salchichas$Calorias[salchichas$tipo == "C"],
+     main = "Histograma Calorías - Salchicha C",
+     xlab = "Calorías", col = "tomato", breaks = 10)
+
+par(mfrow = c(1,1))
+
+#c
