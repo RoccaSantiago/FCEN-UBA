@@ -33,3 +33,109 @@ barplot(diag_rel,
 
 #Ejercicio 2
 
+titanic <- read.csv("Practicas/Data/datos_titanic.csv")
+names(titanic)
+
+#a
+
+#proba de ser mujer y sobrevivir 
+
+sum(titanic$Sex == 'female' & titanic$Survived == 1) / sum(titanic$Survived==1)
+
+#proba de ser mujer
+
+sum(titanic$Sex == 'female') / nrow(titanic)
+
+
+#b
+abs <- table(as.factor(titanic$Survived), as.factor(titanic$Pclass))
+
+rel <-prop.table(abs, margin = 2)
+
+#c
+
+barplot(rel,
+        beside = TRUE,      
+        col = c("tomato", "steelblue"),
+        legend = rownames(rel),      
+        names.arg = c("1ª Clase", "2ª Clase", "3ª Clase"),
+        xlab = "Clase de Pasajero",
+        ylab = "Cantidad de pasajeros",
+        main = "Supervivencia por Clase en el Titanic"
+        )
+
+
+#Ejercicio 3
+
+iridio <- read.csv("Practicas/Data/iridio.txt", sep = " ")
+rodio <- read.csv("Practicas/Data/rodio.txt", sep = " ")
+
+iridio <- iridio[[1]]
+rodio  <- rodio[[1]]
+
+#a
+
+par(mfrow = c(1,2))
+
+hist(iridio, main = "Iridio", col = 'tomato')
+
+hist(rodio, main = "Rodio", col = 'steelblue')
+
+par(mfrow = c(1,1))
+
+boxplot(iridio, rodio,
+        names=c("Iridio","Rodio"),
+        col=c("lightblue","lightgreen"),
+        main="Boxplots comparativos",
+        ylab="Valores"
+        )
+#b
+
+print(paste("Media Iridio", mean(iridio), "Media Rodio" , mean(rodio)))
+
+print(paste("Mediana Iridio", median(iridio), "Mediana Rodio" , median(rodio)))
+
+print(paste("0.2 Media Iridio", mean(iridio, trim = 0.2), "0.2 Media Rodio" , median(rodio, trim = 0.2)))
+
+print(paste("0.1 Media Iridio", mean(iridio, trim = 0.1), "0.1 Media Rodio" , median(rodio, trim = 0.1)))
+
+#c
+
+#Desvio estandar es sd
+print(paste("Desvio Estandar Iridio", sd(iridio), "Desvio Estandar Rodio" , sd(rodio)))
+
+#Rango Intercualificado iqr es la diferencia entre el cuartil 75 y 25
+print(paste("IQR Iridio", IQR(iridio), "IQR Rodio" , IQR(rodio)))
+
+#MAD
+print(paste("MAD Iridio", mad(iridio), "MAD Rodio" , mad(rodio)))
+
+#d
+
+cuantiles <- c(0.9,0.75,0.5,0.25,0.1)
+
+iri_cuan <- quantile(iridio,cuantiles)
+rad_cuan <- quantile(rodio,cuantiles)
+
+#Ejercicio 4
+
+sa <- read.csv("Practicas/Data/salchichas_A.txt",sep = " ")
+sb <- read.csv("Practicas/Data/salchichas_B.txt",sep = " ")
+sc <- read.csv("Practicas/Data/salchichas_C.txt",sep = " ")
+
+
+#a
+colnames(sa)[1] <- "Calorias"
+colnames(sb)[1] <- "Calorias"
+colnames(sc)[1] <- "Calorias"
+
+
+sa$tipo <- 'A'
+sb$tipo <- 'B'
+sc$tipo <- 'C'
+
+salchichas <- rbind(sa,sb,sc)
+
+write.table(salchichas, "Practicas/Data/salchichas.txt", row.names = TRUE, sep = "\t")
+
+#b
