@@ -1,4 +1,4 @@
-"Calorias" "Sodio" "tipo"
+"calorias" "Sodio" "tipo"
 "1" 186 495 "A"
 "2" 181 477 "A"
 "3" 176 425 "A"
